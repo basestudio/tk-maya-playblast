@@ -34,9 +34,10 @@ class PostPlayblast(Hook):
         :action:        String
                         set or unset
         """
-        # get the application
+        # get the application and it's shotgun instance
         app=self.parent
-
+        sg = app.sgtk.shotgun
+        
         if action == "copy_file":
             try:
                 # get all required template
@@ -73,7 +74,6 @@ class PostPlayblast(Hook):
             app.log_debug("Setting up shotgun version entity...")
             
             try:
-                sg = app.sgtk.shotgun
                 filters = [ ["Project", "is", data["project"]],
                             ["code", "is", data["code"]],
                             ]
@@ -88,8 +88,8 @@ class PostPlayblast(Hook):
                     app.log_debug("Create a new Version as %s" % data["code"])
                     result = sg.create('Version', data)
             except:
-                traceback.print_exc()
                 app.log_debug("Something wrong")
+                traceback.print_exc()
             return result
 
         elif action == "upload_movie":
@@ -98,7 +98,6 @@ class PostPlayblast(Hook):
             """
             app.log_debug("Send qtfile to Shotgun")
             try:
-                sg = app.sgtk.shotgun
                 moviePath = data["path"]
                 filters =[ ["Project", "is", data["project"]],
                            ["id", "is", data["version_id"]],
@@ -109,8 +108,8 @@ class PostPlayblast(Hook):
                     result=sg.upload("Version", data["version_id"], moviePath, field_name="sg_uploaded_movie")
                 return result
             except:
-                traceback.print_exc()
                 app.log_debug("Something wrong")
+                traceback.print_exc()
 
         else:
             app.log_debug("nothing to do")
