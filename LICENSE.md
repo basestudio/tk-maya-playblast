@@ -1,0 +1,1 @@
+Copyright (c) 2014, Bernard Rouhi (bernardrouhi@gmail.com) All rights reserved.
