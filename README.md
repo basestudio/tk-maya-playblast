@@ -13,7 +13,7 @@ To enable the apps, additional lines added to environment config shot_step.yml u
       template_shot: maya_shot_playblast
       template_sequence: maya_sequence_playblast
 
-# added to favorite menu
+# added to favourites menu
     menu_favourites:
     - {app_instance: tk-multi-workfiles, name: Shotgun File Manager...}
     - {app_instance: tk-multi-snapshot, name: Snapshot...}
