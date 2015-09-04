@@ -111,7 +111,6 @@ class PlayblastManager(object):
                  'sg_path_to_movie': playblast_movie,
                  'entity': entity,
                  'sg_task': task,
-                 'user': {'type':'HumanUser', 'id':38} 
                }
         self._app.log_debug("Version-creation hook data:\n" + pprint.pformat(data))
         result = self._app.execute_hook("hook_post_playblast", action="create_version", data=data)
