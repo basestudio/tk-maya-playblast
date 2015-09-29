@@ -7,6 +7,8 @@ import threading
 from tank.platform.qt import QtCore, QtGui
 from .ui.playblast_dialog import Ui_PlayblastDialog
 
+SCALE_OPTIONS = [50, 100]
+
 class PlayblastDialog(QtGui.QWidget):
     """
     Main application dialog window
@@ -41,8 +43,10 @@ class PlayblastDialog(QtGui.QWidget):
         self._ui.btnPlayblast.clicked.connect(self.doPlayblast)
 
     def __initComponents(self):
-        # Setting up playblast resolution percentage
-        for percentInt in [50, 100]:
+        # Setting up playblast resolution percentage. Customizable through
+        # optional "scale_options" field in app settings.
+        scaleIntList = self._app.get_setting("scale_options", SCALE_OPTIONS)
+        for percentInt in scaleIntList:
             self._ui.cmbPercentage.addItem( "%d%%" % percentInt, userData=percentInt )
 
     def doPlayblast(self):
