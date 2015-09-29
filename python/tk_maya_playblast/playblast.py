@@ -43,13 +43,18 @@ class PlayblastManager(object):
         fields = template_work.get_fields(sceneName)
         self.shotPlayblastPath = template_shot.apply_fields(fields)
 
-        # set local path on C:\Temp
-        localDir = r"C:\Temp"
+        # Get value of optional config field "temp_directory". If path is
+        # invalid or not absolute, use default tempdir.
+        temp_directory = os.path.normpath( self._app.get_setting("temp_directory", "default") )
+        if not os.path.isabs(temp_directory):
+            import tempfile
+            temp_directory = tempfile.gettempdir()
+
         # make sure it is exists
-        if not os.path.isdir(localDir):
-            os.mkdir(localDir)
+        if not os.path.isdir(temp_directory):
+            os.mkdir(temp_directory)
         # use the basename of generated names
-        self.localPlayblastPath = os.path.join(localDir, os.path.basename(self.shotPlayblastPath))
+        self.localPlayblastPath = os.path.join(temp_directory, os.path.basename(self.shotPlayblastPath))
         # run actual playblast routine
         self.__createPlayblast(**overridePlayblastParams)
         self._app.log_info("Playblast for %s succesful" % sceneName)
