@@ -13,7 +13,17 @@ To enable the apps, additional lines added to environment config shot_step.yml u
       template_shot: maya_shot_playblast
       template_sequence: maya_sequence_playblast
 
-# added to favourites menu
+# Optional Configuration Fields
+
+	  scale_options: [25, 100]
+
+Configure a custom set of playblast resolution percentage, to be selected by user via UI.
+
+	  temp_directory: "C:/Temp"
+
+Configure a local path for playblast file creation before being copied into project folder. Path must be absolute.
+
+# Added to Favourites menu
     menu_favourites:
     - {app_instance: tk-multi-workfiles, name: Shotgun File Manager...}
     - {app_instance: tk-multi-snapshot, name: Snapshot...}

@@ -105,6 +105,7 @@ class PlayblastManager(object):
         if result:
             self._app.log_info("Playblast local file created: %s" % localPlayblastPath)
 
+        # register new Version entity in shotgun or update existing version, minimize shotgun data
         playblast_movie = self.shotPlayblastPath
         project = self._app.context.project
         entity = self._app.context.entity
@@ -121,6 +122,7 @@ class PlayblastManager(object):
         result = self._app.execute_hook("hook_post_playblast", action="create_version", data=data)
         self._app.log_debug("Version-creation hook result:\n" + pprint.pformat(result))
 
+        # upload QT file if creation or update process run succesfully
         if result and self.__uploadToShotgun:
             result = self._app.execute_hook("hook_post_playblast", action="upload_movie",
                                             data=dict(path=data["sg_path_to_movie"],

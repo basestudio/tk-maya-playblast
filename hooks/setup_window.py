@@ -85,7 +85,10 @@ class SetupWindow(Hook):
         Main hook entry point
         
         :action:        String
-                        set or unset
+                        hud_set             -> set required HUDs
+                        hud_unset           -> removed added HUDs, restoring back to original setup
+                        playblast_params    -> read playblast parameters
+                        create_window       -> return function to create playblast window
         """
         if action == 'hud_set':
             visibleHUDs = [f for f in pm.headsUpDisplay(listHeadsUpDisplays=True)

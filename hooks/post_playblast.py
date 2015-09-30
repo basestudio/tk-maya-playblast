@@ -32,7 +32,9 @@ class PostPlayblast(Hook):
         Main hook entry point
         
         :action:        String
-                        set or unset
+                        copy_file           -> copy QTfiles to locations in config
+                        create_version      -> register a new Version entity in Shotgun or update existing Version
+                        upload_move         -> upload generated QT file to Shotgun
         """
         # get the application and it's shotgun instance
         app=self.parent
