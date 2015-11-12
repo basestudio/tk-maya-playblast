@@ -20,7 +20,6 @@ import tank
 from tank import Hook
 
 PLAYBLAST_WINDOW = "Playblast Window"
-CAMERA_NAME_PATTERN = "^TN_Camera_.+RenderShape"
 
 DEFAULT_WIDTH = 720
 DEFAULT_HEIGHT = 540
@@ -151,7 +150,8 @@ class SetupWindow(Hook):
 
                 # Find first camera matching pattern and set as active camera
                 # if not use default current active camera
-                cameraList = [c.name() for c in pm.ls(type="camera", r=True) if re.match( CAMERA_NAME_PATTERN, c.name() )]
+                camera_name_pattern = app.get_setting( "camera_name_pattern", "persp" )
+                cameraList = [c.name() for c in pm.ls(type="camera", r=True) if re.search( camera_name_pattern, c.name() )]
                 if not "cam" in MODEL_EDITOR_PARAMS.keys() and cameraList:
                     MODEL_EDITOR_PARAMS["cam"] = cameraList[0]
                     
