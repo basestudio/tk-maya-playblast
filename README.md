@@ -17,11 +17,15 @@ To enable the apps, additional lines added to environment config shot_step.yml u
 
 	  scale_options: [25, 100]
 
-Configure a custom set of playblast resolution percentage, to be selected by user via UI.
+Configure a custom set of playblast resolution percentage, to be selected by user via UI. *Default: [50, 100]*
 
 	  temp_directory: "C:/Temp"
 
 Configure a local path for playblast file creation before being copied into project folder. Path must be absolute.
+
+	  camera_name_pattern: ".*ShotCam_.*"
+
+Set a regular expression to filter camera names. First camera with matching name will be used for playblast. *Default: "persp"*
 
 # Added to Favourites menu
     menu_favourites:
