@@ -126,7 +126,7 @@ class SetupWindow(Hook):
             # include audio if available
             audioList = pm.ls(type="audio")
             if audioList:
-                playblastParams["sound"] = audioList[0]
+                PLAYBLAST_PARAMS["sound"] = audioList[0]
             return PLAYBLAST_PARAMS
             
         elif action == "create_window":
